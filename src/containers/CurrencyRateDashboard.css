@@ -1,0 +1,19 @@
+.currency_rate_dashboard__item_before {
+  width: 20px;
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+.currency_rate_dashboard__item {
+  display: flex;
+}
+
+.currency_rate_dashboard__item__column {
+  flex-grow: 2;
+  text-align: center;
+}
+
+.currency_rate_dashboard__header {
+  font-size: 0.8rem;
+  color: #71757A;
+}
