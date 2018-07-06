@@ -29,7 +29,7 @@ ReactDOM.render(
     <Provider store={store}>
         <ConnectedRouter history={history}>
             <div>
-                <Route exact path="/" component={App}/>
+                <Route path={`${process.env.PUBLIC_URL}/`} component={App}/>
             </div>
         </ConnectedRouter>
     </Provider>,
