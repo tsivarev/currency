@@ -3,6 +3,6 @@ import {combineReducers} from 'redux';
 import currencyRates from './currency_rates/reducer';
 
 export const rootReducer = combineReducers({
-    currencyRates,
+    currencyRates: currencyRates,
     router: routerReducer,
 });

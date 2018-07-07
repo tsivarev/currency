@@ -7,6 +7,7 @@
     "@vkontakte/icons": "^1.0.3",
     "@vkontakte/vkui": "^2.0.6",
     "@vkontakte/vkui-connect": "^1.0.0",
+    "ecb-exchange-rates": "0.0.7",
     "gh-pages": "^1.2.0",
     "lodash": "^4.17.10",
     "react": "^16.4.1",

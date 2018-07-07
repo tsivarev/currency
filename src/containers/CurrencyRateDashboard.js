@@ -14,7 +14,7 @@ class CurrencyRateDashboard extends Component {
     }
 
     componentDidMount() {
-        this.props.dispatch(currencyRatesActions.fetchCurrencyRates());
+        this.props.dispatch(currencyRatesActions.fetchCbrCurrencyRates());
     }
 
     getPrettyDate(stringDate) {
@@ -45,8 +45,8 @@ class CurrencyRateDashboard extends Component {
                     </div>
                 </UI.ListItem>
 
-                {this.renderRow('$', this.props.currencies['USD'])}
-                {this.renderRow('€', this.props.currencies['EUR'])}
+                {this.renderRow('$', this.props.cbrCurrencies['USD'])}
+                {this.renderRow('€', this.props.cbrCurrencies['EUR'])}
             </UI.List>
         );
     }
@@ -74,8 +74,8 @@ class CurrencyRateDashboard extends Component {
 // which props do we want to inject, given the global store state?
 function mapStateToProps(state) {
     return {
-        rates: currencyRatesSelectors.getDailyCurrencyRates(state),
-        currencies: currencyRatesSelectors.getCurrencyRateByCode(state),
+        rates: currencyRatesSelectors.getCbrDailyCurrencyRates(state),
+        cbrCurrencies: currencyRatesSelectors.getCbrCurrencyRateByCode(state),
     };
 }
 
