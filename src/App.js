@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {push} from 'react-router-redux';
 import * as UI from '@vkontakte/vkui';
-import * as VKConnect from '@vkontakte/vkui-connect';
 import '@vkontakte/vkui/dist/vkui.css';
 import './App.css';
 import logo from './logo.svg';
@@ -13,10 +12,6 @@ import * as currencyRatesActions from './store/currency_rates/actions';
 //<div>Icons made by <a href="https://www.flaticon.com/authors/smashicons" title="Smashicons">Smashicons</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0" target="_blank">CC 3.0 BY</a></div>
 
 class App extends Component {
-
-    constructor(props) {
-        super(props);
-    }
 
     componentDidMount() {
         this.props.dispatch(currencyRatesActions.fetchUsdEurRate());
@@ -37,7 +32,7 @@ class App extends Component {
                         <UI.Group title="Калькулятор">
                             <CurrencyConverter/>
                         </UI.Group>
-                        <UI.Button type="cell" align="center" onClick={this.openCredits.bind(this)}>О
+                        <UI.Button type="cell" align="center" onClick={this.openAbout.bind(this)}>О
                             программе</UI.Button>
                     </UI.Panel>
                 </UI.View>
@@ -45,10 +40,8 @@ class App extends Component {
         );
     }
 
-    openCredits() {
+    openAbout() {
         this.props.dispatch(push('/about'));
-
-        VKConnect.send('VKWebAppViewUpdateNavigationState', {'can_back': true, 'can_forward': false});
     }
 }
 

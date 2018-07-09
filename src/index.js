@@ -14,17 +14,48 @@ import registerServiceWorker from './registerServiceWorker';
 
 
 // Create a history of your choosing (we're using a browser history in this case)
-const history = createHashHistory();
+const history = createHashHistory({
+    hashType: 'noslash'
+});
 
 // Build the middleware for intercepting and dispatching navigation actions
 const reduxRouterMiddleware = routerMiddleware(history);
 
+const logger = store => next => action => {
+    console.log('dispatching', action);
+    return next(action);
+};
+
 const store = createStore(
-    rootReducer,
-    applyMiddleware(thunk, reduxRouterMiddleware)
+    rootReducer, {},
+    applyMiddleware(thunk, reduxRouterMiddleware, logger)
 );
 
 VKConnect.send('VKWebAppInit', {});
+
+let canBack = false;
+let canForward = false;
+
+VKConnect.subscribe(function(e) {
+    e = e.detail;
+    switch (e['type']) {
+        case 'VKWebAppGoBack':
+            history.goBack();
+            break;
+
+        case 'VKWebAppGoForward':
+            history.goForward();
+            break;
+    }
+});
+
+history.listen((location, action) => {
+   if (action === 'POP') {
+       VKConnect.send('VKWebAppViewUpdateNavigationState', {'can_back': canBack, 'can_forward': canForward});
+   } else if (action === 'PUSH') {
+       VKConnect.send('VKWebAppViewUpdateNavigationState', {'can_back': canBack, 'can_forward': canForward});
+   }
+});
 
 ReactDOM.render(
     <Provider store={store}>
