@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import * as UI from '@vkontakte/vkui';
 import './CurrencyRateDashboard.css';
-import * as currencyRatesActions from '../store/currency_rates/actions';
 import * as currencyRatesSelectors from '../store/currency_rates/reducer';
 
 class CurrencyRateDashboard extends Component {
@@ -11,10 +10,6 @@ class CurrencyRateDashboard extends Component {
         super(props);
 
         this.renderRow = this.renderRow.bind(this);
-    }
-
-    componentDidMount() {
-        this.props.dispatch(currencyRatesActions.fetchCbrCurrencyRates());
     }
 
     getPrettyDate(stringDate) {

@@ -2,8 +2,7 @@ import React, {Component} from 'react';
 import * as UI from '@vkontakte/vkui';
 import './CurrencyConverter.css';
 import {connect} from 'react-redux';
-import * as currencyRatesSelectors from "../store/currency_rates/reducer";
-import * as currencyRatesActions from "../store/currency_rates/actions";
+import * as currencyRatesSelectors from '../store/currency_rates/reducer';
 
 class CurrencyConverter extends Component {
 
@@ -23,10 +22,6 @@ class CurrencyConverter extends Component {
 
         this.getCurrencyRate = this.getCurrencyRate.bind(this);
         this.calculateAmount = this.calculateAmount.bind(this);
-    }
-
-    componentDidMount() {
-        this.props.dispatch(currencyRatesActions.fetchUsdEurRate());
     }
 
     changeSourceCurrencyCode(e) {
@@ -107,34 +102,54 @@ class CurrencyConverter extends Component {
         });
     }
 
+    getCurrencySymbol(code) {
+        switch (code) {
+            case 'USD':
+                return '$';
+            case 'EUR':
+                return '€';
+            case 'RUB':
+                return '₽';
+        }
+
+        return '';
+    }
+
     render() {
-        return (<UI.FormLayout>
-            <div style={{display: "flex"}}>
-                <div style={{flexGrow: 4, marginRight: 10}}>
-                    <UI.Input type="number" placeholder="0" value={this.state.amount ? this.state.amount.toLocaleString() : ''} alignment="center" onChange={this.changeAmount}/>
+        return (
+            <UI.FormLayout>
+                <div style={{color: UI.colors.captionGray}}>
+                    Курс
+                    1 {this.getCurrencySymbol(this.state.sourceCurrencyCode)} = {this.getPrettyAmount(this.getCurrencyRate(this.state.sourceCurrencyCode, this.state.targetCurrencyCode))} {this.getCurrencySymbol(this.state.targetCurrencyCode)}
                 </div>
-                <div style={{flexGrow: 1}}>
-                    <UI.Select value={this.state.sourceCurrencyCode} onChange={this.changeSourceCurrencyCode}>
-                        <option value="USD">$</option>
-                        <option value="EUR">€</option>
-                        <option value="RUB">₽</option>
-                    </UI.Select>
+                <div style={{display: "flex"}}>
+                    <div style={{flexGrow: 4, marginRight: 10}}>
+                        <UI.Input type="number" placeholder="0" pattern="\d*"
+                                  value={this.state.amount ? this.state.amount.toLocaleString() : ''} alignment="center"
+                                  onChange={this.changeAmount}/>
+                    </div>
+                    <div style={{flexGrow: 1}}>
+                        <UI.Select value={this.state.sourceCurrencyCode} onChange={this.changeSourceCurrencyCode}>
+                            <option value="USD">{this.getCurrencySymbol('USD')}</option>
+                            <option value="EUR">{this.getCurrencySymbol('EUR')}</option>
+                            <option value="RUB">{this.getCurrencySymbol('RUB')}</option>
+                        </UI.Select>
+                    </div>
                 </div>
-            </div>
-            <div style={{display: "flex"}}>
-                <div style={{flexGrow: 4, marginRight: 10}}>
-                    <UI.Input type="text" alignment="center" disabled
-                              value={this.getPrettyAmount(this.state.convertedAmount)}/>
+                <div style={{display: "flex"}}>
+                    <div style={{flexGrow: 4, marginRight: 10}}>
+                        <UI.Input type="text" alignment="center" disabled
+                                  value={this.getPrettyAmount(this.state.convertedAmount)}/>
+                    </div>
+                    <div style={{flexGrow: 1}}>
+                        <UI.Select value={this.state.targetCurrencyCode} onChange={this.changeTargetCurrencyCode}>
+                            <option value="USD">{this.getCurrencySymbol('USD')}</option>
+                            <option value="EUR">{this.getCurrencySymbol('EUR')}</option>
+                            <option value="RUB">{this.getCurrencySymbol('RUB')}</option>
+                        </UI.Select>
+                    </div>
                 </div>
-                <div style={{flexGrow: 1}}>
-                    <UI.Select value={this.state.targetCurrencyCode} onChange={this.changeTargetCurrencyCode}>
-                        <option value="USD">$</option>
-                        <option value="EUR">€</option>
-                        <option value="RUB">₽</option>
-                    </UI.Select>
-                </div>
-            </div>
-        </UI.FormLayout>);
+            </UI.FormLayout>);
     }
 }
 
