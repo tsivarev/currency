@@ -17,8 +17,6 @@ const history = createHashHistory({
     hashType: 'noslash'
 });
 
-const reduxRouterMiddleware = routerMiddleware(history);
-
 const logger = store => next => action => {
     console.log('dispatching', action);
     return next(action);
@@ -26,7 +24,7 @@ const logger = store => next => action => {
 
 const store = createStore(
     rootReducer, {},
-    applyMiddleware(thunk, reduxRouterMiddleware, logger)
+    applyMiddleware(thunk, routerMiddleware(history), logger)
 );
 
 VKConnect.send('VKWebAppInit', {});
