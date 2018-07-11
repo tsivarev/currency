@@ -65,8 +65,6 @@ class CurrencyRateDashboard extends Component {
     }
 }
 
-
-// which props do we want to inject, given the global store state?
 function mapStateToProps(state) {
     return {
         rates: currencyRatesSelectors.getCbrDailyCurrencyRates(state),

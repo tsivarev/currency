@@ -36,8 +36,6 @@ class App extends Component {
     }
 }
 
-
-// which props do we want to inject, given the global store state?
 function mapStateToProps(state) {
     return {};
 }
