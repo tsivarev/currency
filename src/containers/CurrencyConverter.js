@@ -65,8 +65,8 @@ class CurrencyConverter extends Component {
         }
 
         if (sourceCurrencyCode === RUB) {
-            if (this.props.cbrCurrencies[sourceCurrencyCode]) {
-                return 1 / this.props.cbrCurrencies[sourceCurrencyCode].Value;
+            if (this.props.cbrCurrencies[targetCurrencyCode]) {
+                return 1 / this.props.cbrCurrencies[targetCurrencyCode].Value;
             } else {
                 return 1;
             }
