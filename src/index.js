@@ -3,15 +3,11 @@ import ReactDOM from 'react-dom';
 import {applyMiddleware, createStore} from 'redux';
 import {Provider} from 'react-redux';
 import {createHashHistory} from 'history';
-import {ConnectedRouter, routerMiddleware} from 'react-router-redux';
+import {routerMiddleware} from 'react-router-redux';
 import thunk from 'redux-thunk';
-import {Route} from 'react-router';
-import * as VKConnect from '@vkontakte/vkui-connect';
-import App from './App';
-import About from './About';
 import {rootReducer} from './store/reducers';
 import registerServiceWorker from './registerServiceWorker';
-import * as currencyRatesActions from './store/currency_rates/actions';
+import Root from './containers/Root';
 
 const history = createHashHistory({
     hashType: 'noslash'
@@ -23,23 +19,13 @@ const logger = store => next => action => {
 };
 
 const store = createStore(
-    rootReducer, {},
+    rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
     applyMiddleware(thunk, routerMiddleware(history), logger)
 );
 
-VKConnect.send('VKWebAppInit', {});
-
-store.dispatch(currencyRatesActions.fetchUsdEurRate());
-store.dispatch(currencyRatesActions.fetchCbrCurrencyRates());
-
 ReactDOM.render(
     <Provider store={store}>
-        <ConnectedRouter history={history}>
-            <div>
-                <Route exact path='/' component={App}/>
-                <Route path='/about' component={About}/>
-            </div>
-        </ConnectedRouter>
+        <Root history={history}/>
     </Provider>,
     document.getElementById('root')
 );
