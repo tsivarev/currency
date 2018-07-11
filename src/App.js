@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import {push} from 'react-router-redux';
 import * as UI from '@vkontakte/vkui';
 import '@vkontakte/vkui/dist/vkui.css';
 import logo from './logo.svg';
 import CurrencyRateDashboard from './containers/CurrencyRateDashboard';
 import CurrencyConverter from './containers/CurrencyConverter';
-import {connect} from 'react-redux';
 
 class App extends Component {
 
