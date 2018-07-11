@@ -110,9 +110,10 @@ class CurrencyConverter extends Component {
                 return '€';
             case 'RUB':
                 return '₽';
-        }
 
-        return '';
+            default:
+                return '';
+        }
     }
 
     render() {

@@ -11,6 +11,7 @@ import App from './App';
 import About from './About';
 import {rootReducer} from './store/reducers';
 import registerServiceWorker from './registerServiceWorker';
+import * as currencyRatesActions from "./store/currency_rates/actions";
 
 
 // Create a history of your choosing (we're using a browser history in this case)
@@ -33,6 +34,9 @@ const store = createStore(
 
 VKConnect.send('VKWebAppInit', {});
 
+store.dispatch(currencyRatesActions.fetchUsdEurRate());
+store.dispatch(currencyRatesActions.fetchCbrCurrencyRates());
+
 let canBack = false;
 let canForward = false;
 
@@ -46,6 +50,8 @@ VKConnect.subscribe(function(e) {
         case 'VKWebAppGoForward':
             history.goForward();
             break;
+        default:
+            //nop
     }
 });
 
