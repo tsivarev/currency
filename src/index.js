@@ -11,7 +11,7 @@ import App from './App';
 import About from './About';
 import {rootReducer} from './store/reducers';
 import registerServiceWorker from './registerServiceWorker';
-import * as currencyRatesActions from "./store/currency_rates/actions";
+import * as currencyRatesActions from './store/currency_rates/actions';
 
 
 // Create a history of your choosing (we're using a browser history in this case)

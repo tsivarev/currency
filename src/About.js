@@ -5,7 +5,7 @@ import Icon24Back from '@vkontakte/icons/dist/24/back';
 import Icon28ChevronBack from '@vkontakte/icons/dist/28/chevron_back';
 import './App.css';
 import {connect} from 'react-redux';
-import {goBack} from "react-router-redux";
+import {goBack} from 'react-router-redux';
 
 class About extends Component {
 
@@ -29,7 +29,10 @@ class About extends Component {
                             <UI.List>
                                 <UI.ListItem multiline>
                                     Код доступен на <a href="https://github.com/tsivarev/currency"
-                                                title="Github">GitHub</a>.
+                                                       title="Github">GitHub</a>.
+                                </UI.ListItem>
+                                <UI.ListItem multiline>
+                                    Документация <a href="https://vk.com/dev/vk_apps_docs">VK Apps</a> платформы.
                                 </UI.ListItem>
                             </UI.List>
                         </UI.Group>

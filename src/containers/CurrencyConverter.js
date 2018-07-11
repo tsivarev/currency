@@ -122,18 +122,18 @@ class CurrencyConverter extends Component {
 
     render() {
         return (
-            <UI.Div>
+            <UI.Div className="currency_converter">
                 <div style={{color: UI.colors.captionGray}}>
                     Курс
                     1 {this.getCurrencySymbol(this.state.sourceCurrencyCode)} = {this.getPrettyAmount(this.getCurrencyRate(this.state.sourceCurrencyCode, this.state.targetCurrencyCode))} {this.getCurrencySymbol(this.state.targetCurrencyCode)}
                 </div>
-                <div style={{display: "flex", margin: "10px 0px"}}>
-                    <div style={{flexGrow: 4, marginRight: 10}}>
+                <div className="currency_converter__amount_input">
+                    <div className="currency_converter__amount_input__input">
                         <UI.Input type="number" placeholder="0" pattern="\d*"
                                   value={this.state.amount ? this.state.amount.toLocaleString() : ''} alignment="center"
                                   onChange={this.changeAmount}/>
                     </div>
-                    <div style={{flexGrow: 1}}>
+                    <div className="currency_converter__amount_input__selector">
                         <UI.Select value={this.state.sourceCurrencyCode} onChange={this.changeSourceCurrencyCode}>
                             <option value={USD}>{this.getCurrencySymbol(USD)}</option>
                             <option value={EUR}>{this.getCurrencySymbol(EUR)}</option>
@@ -141,12 +141,12 @@ class CurrencyConverter extends Component {
                         </UI.Select>
                     </div>
                 </div>
-                <div style={{display: "flex", margin: "10px 0px"}}>
-                    <div style={{flexGrow: 4, marginRight: 10}}>
+                <div className="currency_converter__amount_input">
+                    <div className="currency_converter__amount_input__input">
                         <UI.Input type="text" alignment="center" disabled
                                   value={this.getPrettyAmount(this.state.convertedAmount)}/>
                     </div>
-                    <div style={{flexGrow: 1}}>
+                    <div className="currency_converter__amount_input__selector">
                         <UI.Select value={this.state.targetCurrencyCode} onChange={this.changeTargetCurrencyCode}>
                             <option value={USD}>{this.getCurrencySymbol(USD)}</option>
                             <option value={EUR}>{this.getCurrencySymbol(EUR)}</option>

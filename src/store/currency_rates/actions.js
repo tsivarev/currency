@@ -1,6 +1,6 @@
 import * as types from './actionTypes';
 import CBR from '../../services/CBR';
-import CurrencyConverter from "../../services/CurrencyConverter";
+import CurrencyConverter from '../../services/CurrencyConverter';
 
 export function fetchCbrCurrencyRates() {
     return async (dispatch, getState) => {

@@ -6,7 +6,7 @@ import './App.css';
 import logo from './logo.svg';
 import CurrencyRateDashboard from './containers/CurrencyRateDashboard';
 import CurrencyConverter from './containers/CurrencyConverter';
-import {connect} from "react-redux";
+import {connect} from 'react-redux';
 
 class App extends Component {
 

@@ -1,3 +1,17 @@
-.Input--center input {
+.currency_converter .Input--center input {
   text-align: right;
+}
+
+.currency_converter__amount_input {
+  display: flex;
+  margin: 10px 0;
+}
+
+.currency_converter__amount_input__input {
+  flex-grow: 4;
+  margin-right: 10px;
+}
+
+.currency_converter__amount_input__selector {
+  flex-grow: 1;
 }
