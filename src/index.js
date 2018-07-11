@@ -13,13 +13,10 @@ import {rootReducer} from './store/reducers';
 import registerServiceWorker from './registerServiceWorker';
 import * as currencyRatesActions from './store/currency_rates/actions';
 
-
-// Create a history of your choosing (we're using a browser history in this case)
 const history = createHashHistory({
     hashType: 'noslash'
 });
 
-// Build the middleware for intercepting and dispatching navigation actions
 const reduxRouterMiddleware = routerMiddleware(history);
 
 const logger = store => next => action => {
