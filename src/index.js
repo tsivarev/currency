@@ -37,32 +37,6 @@ VKConnect.send('VKWebAppInit', {});
 store.dispatch(currencyRatesActions.fetchUsdEurRate());
 store.dispatch(currencyRatesActions.fetchCbrCurrencyRates());
 
-let canBack = false;
-let canForward = false;
-
-VKConnect.subscribe(function(e) {
-    e = e.detail;
-    switch (e['type']) {
-        case 'VKWebAppGoBack':
-            history.goBack();
-            break;
-
-        case 'VKWebAppGoForward':
-            history.goForward();
-            break;
-        default:
-            //nop
-    }
-});
-
-history.listen((location, action) => {
-   if (action === 'POP') {
-       VKConnect.send('VKWebAppViewUpdateNavigationState', {'can_back': canBack, 'can_forward': canForward});
-   } else if (action === 'PUSH') {
-       VKConnect.send('VKWebAppViewUpdateNavigationState', {'can_back': canBack, 'can_forward': canForward});
-   }
-});
-
 ReactDOM.render(
     <Provider store={store}>
         <ConnectedRouter history={history}>

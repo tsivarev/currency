@@ -6,8 +6,9 @@ import './App.css';
 import logo from './logo.svg';
 import CurrencyRateDashboard from './containers/CurrencyRateDashboard';
 import CurrencyConverter from './containers/CurrencyConverter';
+import {connect} from "react-redux";
 
-export default class App extends Component {
+class App extends Component {
 
     render() {
         return (
@@ -35,3 +36,11 @@ export default class App extends Component {
         this.props.dispatch(push('/about'));
     }
 }
+
+
+// which props do we want to inject, given the global store state?
+function mapStateToProps(state) {
+    return {};
+}
+
+export default connect(mapStateToProps)(App);

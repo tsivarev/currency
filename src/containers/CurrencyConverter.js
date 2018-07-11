@@ -4,14 +4,18 @@ import './CurrencyConverter.css';
 import {connect} from 'react-redux';
 import * as currencyRatesSelectors from '../store/currency_rates/reducer';
 
+const USD = 'USD';
+const RUB = 'RUB';
+const EUR = 'EUR';
+
 class CurrencyConverter extends Component {
 
     constructor(props) {
         super(props);
 
         this.state = {
-            sourceCurrencyCode: 'USD',
-            targetCurrencyCode: 'RUB',
+            sourceCurrencyCode: USD,
+            targetCurrencyCode: RUB,
             amount: 0,
             convertedAmount: '0',
         };
@@ -60,7 +64,7 @@ class CurrencyConverter extends Component {
             return 1;
         }
 
-        if (sourceCurrencyCode === 'RUB') {
+        if (sourceCurrencyCode === RUB) {
             if (this.props.cbrCurrencies[sourceCurrencyCode]) {
                 return 1 / this.props.cbrCurrencies[sourceCurrencyCode].Value;
             } else {
@@ -68,7 +72,7 @@ class CurrencyConverter extends Component {
             }
         }
 
-        if (targetCurrencyCode === 'RUB') {
+        if (targetCurrencyCode === RUB) {
             if (this.props.cbrCurrencies[sourceCurrencyCode]) {
                 return this.props.cbrCurrencies[sourceCurrencyCode].Value;
             } else {
@@ -76,11 +80,11 @@ class CurrencyConverter extends Component {
             }
         }
 
-        if (targetCurrencyCode === 'USD') {
+        if (targetCurrencyCode === USD) {
             return 1 / this.props.usdEurRate.USD_EUR.val;
         }
 
-        if (targetCurrencyCode === 'EUR') {
+        if (targetCurrencyCode === EUR) {
             return this.props.usdEurRate.USD_EUR.val;
         }
 
@@ -104,11 +108,11 @@ class CurrencyConverter extends Component {
 
     getCurrencySymbol(code) {
         switch (code) {
-            case 'USD':
+            case USD:
                 return '$';
-            case 'EUR':
+            case EUR:
                 return '€';
-            case 'RUB':
+            case RUB:
                 return '₽';
 
             default:
@@ -131,9 +135,9 @@ class CurrencyConverter extends Component {
                     </div>
                     <div style={{flexGrow: 1}}>
                         <UI.Select value={this.state.sourceCurrencyCode} onChange={this.changeSourceCurrencyCode}>
-                            <option value="USD">{this.getCurrencySymbol('USD')}</option>
-                            <option value="EUR">{this.getCurrencySymbol('EUR')}</option>
-                            <option value="RUB">{this.getCurrencySymbol('RUB')}</option>
+                            <option value={USD}>{this.getCurrencySymbol(USD)}</option>
+                            <option value={EUR}>{this.getCurrencySymbol(EUR)}</option>
+                            <option value={RUB}>{this.getCurrencySymbol(RUB)}</option>
                         </UI.Select>
                     </div>
                 </div>
@@ -144,9 +148,9 @@ class CurrencyConverter extends Component {
                     </div>
                     <div style={{flexGrow: 1}}>
                         <UI.Select value={this.state.targetCurrencyCode} onChange={this.changeTargetCurrencyCode}>
-                            <option value="USD">{this.getCurrencySymbol('USD')}</option>
-                            <option value="EUR">{this.getCurrencySymbol('EUR')}</option>
-                            <option value="RUB">{this.getCurrencySymbol('RUB')}</option>
+                            <option value={USD}>{this.getCurrencySymbol(USD)}</option>
+                            <option value={EUR}>{this.getCurrencySymbol(EUR)}</option>
+                            <option value={RUB}>{this.getCurrencySymbol(RUB)}</option>
                         </UI.Select>
                     </div>
                 </div>
