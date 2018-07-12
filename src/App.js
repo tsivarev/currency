@@ -16,7 +16,7 @@ import * as currencyRatesActions from './store/currency_rates/actions';
 
 class App extends Component {
 
-    componentDidMount() {
+    componentWillMount() {
         if (this.props.accessToken) {
             this.props.dispatch(vkActions.fetchNotificationStatus(this.props.accessToken));
         }
