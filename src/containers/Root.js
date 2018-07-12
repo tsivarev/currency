@@ -11,7 +11,7 @@ import * as vkSelectors from '../store/vk/reducer';
 class Root extends Component {
 
     componentWillMount() {
-        vkActions.initApp();
+        this.props.dispatch(vkActions.initApp());
         let appId = process.env.NODE_ENV === 'production' ? 6625834 : 6625863;
         this.props.dispatch(vkActions.fetchAccessToken(appId));
     }

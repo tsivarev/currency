@@ -5,6 +5,7 @@ import * as UI from '@vkontakte/vkui';
 import '@vkontakte/vkui/dist/vkui.css';
 import Icon24Notification from '@vkontakte/icons/dist/24/notification';
 import Icon24NotificationDisable from '@vkontakte/icons/dist/24/notification_disable';
+import Icon24Message from '@vkontakte/icons/dist/24/message';
 import logo from './logo.svg';
 import CurrencyRateDashboard from './containers/CurrencyRateDashboard';
 import CurrencyConverter from './containers/CurrencyConverter';
@@ -38,8 +39,14 @@ class App extends Component {
                         <UI.Group title="Калькулятор">
                             <CurrencyConverter/>
                         </UI.Group>
-                        <UI.Button type="cell" align="center" onClick={this.openAbout.bind(this)}>О
-                            программе</UI.Button>
+                        <UI.Div style={{display: 'flex', justifyContent: 'center'}}>
+                            <UI.Button level="3" component="a"
+                                       href="https://vk.me/currency_app" before={<Icon24Message/>}/>
+                            <UI.Button level="3" component="a"
+                                       href="https://vk.com/currency_app">Группа</UI.Button>
+                            <UI.Button level="3" component="a" onClick={this.openAbout.bind(this)}>О
+                                программе</UI.Button>
+                        </UI.Div>
                     </UI.Panel>
                 </UI.View>
             </UI.Root>

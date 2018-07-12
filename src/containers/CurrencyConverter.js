@@ -130,7 +130,7 @@ class CurrencyConverter extends Component {
                 <div className="currency_converter__amount_input">
                     <div className="currency_converter__amount_input__input">
                         <UI.Input type="number" placeholder="0" pattern="\d*"
-                                  value={this.state.amount ? this.state.amount.toLocaleString() : ''} alignment="center"
+                                  value={this.state.amount ? this.state.amount.toLocaleString() : ''} alignment="right"
                                   onChange={this.changeAmount}/>
                     </div>
                     <div className="currency_converter__amount_input__selector">
@@ -143,7 +143,7 @@ class CurrencyConverter extends Component {
                 </div>
                 <div className="currency_converter__amount_input">
                     <div className="currency_converter__amount_input__input">
-                        <UI.Input type="text" alignment="center" disabled
+                        <UI.Input type="text" alignment="right" disabled
                                   value={this.getPrettyAmount(this.state.convertedAmount)}/>
                     </div>
                     <div className="currency_converter__amount_input__selector">

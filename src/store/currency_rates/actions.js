@@ -5,7 +5,7 @@ import CurrencyConverter from '../../services/CurrencyConverter';
 export function fetchCbrCurrencyRates() {
     return async (dispatch, getState) => {
         try {
-            const daily = await CBR.getDaily();
+            const daily = await CBR.getDaily(new Date());
             dispatch({type: types.CBR_DAILY_FETCHED, daily: daily});
         } catch (error) {
             console.error(error);

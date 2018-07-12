@@ -3,7 +3,6 @@ import * as UI from '@vkontakte/vkui';
 import '@vkontakte/vkui/dist/vkui.css';
 import Icon24Back from '@vkontakte/icons/dist/24/back';
 import Icon28ChevronBack from '@vkontakte/icons/dist/28/chevron_back';
-import Icon28Message from '@vkontakte/icons/dist/28/message';
 import {connect} from 'react-redux';
 import {goBack} from 'react-router-redux';
 
@@ -25,8 +24,6 @@ class About extends Component {
                                 О программе
                             </UI.PanelHeaderContent>
                         </UI.PanelHeader>
-                        <UI.Button type="cell" align="center" component="a" href="https://vk.me/currency_app"
-                                   before={<Icon28Message/>}>Написать сообщение</UI.Button>
                         <UI.Group title="Исходный код">
                             <UI.Div>
                                 Исходный код доступен на <a href="https://github.com/tsivarev/currency"

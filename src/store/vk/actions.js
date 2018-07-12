@@ -1,32 +1,20 @@
 import * as VKConnect from '@vkontakte/vkui-connect';
 import * as types from './actionTypes';
 
+const API_VERSION = '5.80';
+
 export function fetchAccessToken(appId) {
-    return async (dispatch, getState) => {
-        sendEvent('VKWebAppGetAuthToken', {'app_id': appId},
-            data => {
-                dispatch({type: types.VK_GET_ACCESS_TOKEN_FETCHED, accessToken: data['access_token']});
-            }, error => {
-                dispatch({type: types.VK_GET_ACCESS_TOKEN_FAILED, error: error});
-            });
+    return async () => {
+        VKConnect.send('VKWebAppGetAuthToken', {'app_id': appId});
     }
 }
 
 export function fetchNotificationStatus(accessToken) {
-    return async (dispatch, getState) => {
-        sendEvent('VKWebAppCallAPIMethod', {
-            'method': 'apps.isNotificationsAllowed', 'params': {
-                'access_token': accessToken,
-                'v': '5.80'
-            }
-        }, data => {
-            //Dirty hack
-            let isClient = typeof window !== 'undefined';
-            let androidBridge = isClient && window.AndroidBridge;
-
+    return async (dispatch) => {
+        apiRequest('apps.isNotificationsAllowed', {}, accessToken, response => {
             dispatch({
                 type: types.VK_NOTIFICATION_STATUS_FETCHED,
-                notificationStatus: androidBridge ? data['response']['response']['is_allowed'] : data['response']['is_allowed'],
+                notificationStatus: response['is_allowed'],
             });
         }, error => {
             dispatch({type: types.VK_NOTIFICATION_STATUS_FAILED, error: error});
@@ -35,77 +23,105 @@ export function fetchNotificationStatus(accessToken) {
 }
 
 export function denyNotifications() {
-    return async (dispatch, getState) => {
-        sendEvent('VKWebAppDenyNotifications', {}, () => {
-            dispatch({
-                type: types.VK_NOTIFICATION_STATUS_FETCHED,
-                notificationStatus: false,
-            });
-        }, error => {
-            dispatch({type: types.VK_NOTIFICATION_STATUS_FAILED, error: error});
-        });
+    return async () => {
+        VKConnect.send('VKWebAppDenyNotifications', {});
     }
 }
 
 export function allowNotifications() {
-    return async (dispatch, getState) => {
-        sendEvent('VKWebAppAllowNotifications', {}, () => {
-            dispatch({
-                type: types.VK_NOTIFICATION_STATUS_FETCHED,
-                notificationStatus: true,
-            });
-        }, error => {
-            dispatch({type: types.VK_NOTIFICATION_STATUS_FAILED, error: error});
-        });
+    return async () => {
+        VKConnect.send('VKWebAppAllowNotifications', {});
     }
 }
 
 export function initApp() {
-    sendEvent('VKWebAppInit');
+    return async (dispatch) => {
+        VKConnect.subscribe(e => {
+            let vkEvent = e.detail;
+            if (!vkEvent) {
+                console.error('invalid event', e);
+                return;
+            }
+
+            let type = vkEvent['type'];
+            let data = vkEvent['data'];
+
+            switch (type) {
+                case 'VKWebAppAllowNotificationsResult':
+                    dispatch({
+                        type: types.VK_NOTIFICATION_STATUS_FETCHED,
+                        notificationStatus: true,
+                    });
+                    break;
+
+                case 'VKWebAppDenyNotificationsResult':
+                    dispatch({
+                        type: types.VK_NOTIFICATION_STATUS_FETCHED,
+                        notificationStatus: false,
+                    });
+                    break;
+
+                case 'VKWebAppAccessTokenReceived':
+                    dispatch({
+                        type: types.VK_GET_ACCESS_TOKEN_FETCHED,
+                        accessToken: data['access_token']
+                    });
+                    break;
+            }
+        });
+
+        VKConnect.send('VKWebAppInit', {'no_toolbar': true});
+    }
 }
 
-function sendEvent(sendType, params = {}, successCallback = () => {
-}, errorCallback = () => {
-}) {
-    VKConnect.subscribe(e => {
-        let vkEvent = e.detail;
-        let type = vkEvent['type'];
-        let data = vkEvent['data'];
+function apiRequest(method, params = {}, accessToken = '', successCallback = undefined, errorCallback = undefined) {
+    if (successCallback !== undefined || errorCallback !== undefined) {
+        function callback(e) {
+            let vkEvent = e.detail;
+            if (!vkEvent) {
+                console.error('invalid event', e);
+                return;
+            }
 
-        switch (sendType) {
-            case 'VKWebAppCallAPIMethod':
-                if (type === 'VKWebAppCallAPIMethodResult') {
-                    successCallback(data);
-                } else if (type === 'VKWebAppCallAPIMethodFailed') {
+            let type = vkEvent['type'];
+            let data = vkEvent['data'];
+
+            let found = false;
+            if ('VKWebAppCallAPIMethodResult' === type) {
+                if (successCallback !== undefined) {
+                    //Dirty hack
+                    let isClient = typeof window !== 'undefined';
+                    let isAndroidBridge = isClient && window.AndroidBridge;
+
+                    let response = isAndroidBridge ? data['response']['response'] : data['response'];
+                    successCallback(response);
+                }
+
+                found = true;
+            } else if ('VKWebAppCallAPIMethodFailed' === type) {
+                if (errorCallback !== undefined) {
                     errorCallback(data);
                 }
-                break;
 
-            case 'VKWebAppGetAuthToken':
-                if (type === 'VKWebAppAccessTokenReceived') {
-                    successCallback(data);
-                } else if (type === 'VKWebAppAccessTokenFailed') {
-                    errorCallback(data);
-                }
-                break;
+                found = true;
+            }
 
-            case 'VKWebAppAllowNotifications':
-                if (type === 'VKWebAppAllowNotificationsResult') {
-                    successCallback(data);
-                } else if (type === 'VKWebAppAllowNotificationsFailed') {
-                    errorCallback(data);
-                }
-                break;
+            if (found) {
+                VKConnect.unsubscribe(callback);
+            }
 
-            case 'VKWebAppDenyNotifications':
-                if (type === 'VKWebAppDenyNotificationsResult') {
-                    successCallback(data);
-                } else if (type === 'VKWebAppDenyNotificationsFailed') {
-                    errorCallback(data);
-                }
-                break;
         }
-    });
 
-    VKConnect.send(sendType, params);
+        VKConnect.subscribe(callback);
+    }
+
+    params['access_token'] = accessToken;
+
+    if (params['v'] === undefined) {
+        params['v'] = API_VERSION;
+    }
+
+    VKConnect.send('VKWebAppCallAPIMethod', {
+        'method': method, 'params': params
+    });
 }
