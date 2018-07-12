@@ -6,6 +6,7 @@ import '@vkontakte/vkui/dist/vkui.css';
 import Icon24Notification from '@vkontakte/icons/dist/24/notification';
 import Icon24NotificationDisable from '@vkontakte/icons/dist/24/notification_disable';
 import Icon24Message from '@vkontakte/icons/dist/24/message';
+import Icon24User from '@vkontakte/icons/dist/24/user';
 import logo from './logo.svg';
 import CurrencyRateDashboard from './containers/CurrencyRateDashboard';
 import CurrencyConverter from './containers/CurrencyConverter';
@@ -55,6 +56,17 @@ class App extends Component {
 
     renderNotificationButton() {
         const {notificationStatus} = this.props;
+        if (!this.props.accessToken) {
+            return (<UI.Div>
+                <UI.Button
+                    before={<Icon24User/>}
+                    level='1'
+                    size="xl"
+                    onClick={this.authorize.bind(this)}
+                >Авторизоваться</UI.Button>
+            </UI.Div>);
+        }
+
         if (notificationStatus === undefined) {
             return (null);
         }
@@ -68,6 +80,12 @@ class App extends Component {
             >{notificationStatus ? 'Отписаться' : 'Подписаться'}</UI.Button>
         </UI.Div>);
     }
+
+
+    authorize() {
+        this.props.dispatch(vkActions.fetchAccessToken());
+    }
+
 
     toggleNotifications() {
         const {notificationStatus} = this.props;

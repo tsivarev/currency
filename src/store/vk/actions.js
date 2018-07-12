@@ -3,8 +3,9 @@ import * as types from './actionTypes';
 
 const API_VERSION = '5.80';
 
-export function fetchAccessToken(appId) {
+export function fetchAccessToken() {
     return async () => {
+        let appId = process.env.NODE_ENV === 'production' ? 6625834 : 6625863;
         VKConnect.send('VKWebAppGetAuthToken', {'app_id': appId});
     }
 }

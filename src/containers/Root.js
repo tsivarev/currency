@@ -12,8 +12,7 @@ class Root extends Component {
 
     componentWillMount() {
         this.props.dispatch(vkActions.initApp());
-        let appId = process.env.NODE_ENV === 'production' ? 6625834 : 6625863;
-        this.props.dispatch(vkActions.fetchAccessToken(appId));
+        this.props.dispatch(vkActions.fetchAccessToken());
     }
 
     render() {
