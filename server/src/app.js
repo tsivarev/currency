@@ -3,7 +3,7 @@ const cron = require("node-cron");
 const axios = require("axios");
 const querystring = require('querystring');
 const sqlite3 = require('sqlite3').verbose();
-const config = require('../config/config.tsivarev.json');
+const config = require('../config/config.template.json');
 
 const db = new sqlite3.Database('data/database.sqlite');
 
