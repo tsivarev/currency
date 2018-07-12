@@ -1,0 +1,21 @@
+{
+  "name": "currency_server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "dev": "nodemon src/app.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.18.0",
+    "express": "^4.16.3",
+    "node-cron": "^1.2.1",
+    "querystring": "^0.2.0",
+    "sqlite3": "^4.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.1"
+  }
+}

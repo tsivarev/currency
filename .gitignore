@@ -1,7 +1,11 @@
 # See https://help.github.com/ignore-files/ for more about ignoring files.
 
 # dependencies
-/node_modules
+/app/node_modules
+/server/node_modules
+
+# config
+/server/config/config.tsivarev.json
 
 # testing
 /coverage
