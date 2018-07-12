@@ -27,7 +27,7 @@ class About extends Component {
                         <UI.Group title="Исходный код">
                             <UI.Div>
                                 Исходный код доступен на <a href="https://github.com/tsivarev/currency"
-                                                       title="Github">GitHub</a>.
+                                                            title="Github">GitHub</a>.
                                 <br/>
                                 <br/>
                                 Документация <a href="https://vk.com/dev/vk_apps_docs">VK Apps платформы</a>.

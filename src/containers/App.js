@@ -1,18 +1,17 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {push} from 'react-router-redux';
 import * as UI from '@vkontakte/vkui';
 import '@vkontakte/vkui/dist/vkui.css';
 import Icon24Notification from '@vkontakte/icons/dist/24/notification';
 import Icon24NotificationDisable from '@vkontakte/icons/dist/24/notification_disable';
-import Icon24Message from '@vkontakte/icons/dist/24/message';
 import Icon24User from '@vkontakte/icons/dist/24/user';
-import logo from './logo.svg';
-import CurrencyRateDashboard from './containers/CurrencyRateDashboard';
-import CurrencyConverter from './containers/CurrencyConverter';
-import * as vkSelectors from './store/vk/reducer';
-import * as vkActions from './store/vk/actions';
-import * as currencyRatesActions from './store/currency_rates/actions';
+import logo from '../logo.svg';
+import CurrencyRateDashboard from './CurrencyRateDashboard';
+import CurrencyConverter from './CurrencyConverter';
+import * as vkSelectors from '../store/vk/reducer';
+import * as vkActions from '../store/vk/actions';
+import * as currencyRatesActions from '../store/currency_rates/actions';
+import Footer from './Footer';
 
 class App extends Component {
 
@@ -40,14 +39,7 @@ class App extends Component {
                         <UI.Group title="Калькулятор">
                             <CurrencyConverter/>
                         </UI.Group>
-                        <UI.Div style={{display: 'flex', justifyContent: 'center'}}>
-                            <UI.Button level="3" component="a"
-                                       href="https://vk.me/currency_app" before={<Icon24Message/>}/>
-                            <UI.Button level="3" component="a"
-                                       href="https://vk.com/currency_app">Группа</UI.Button>
-                            <UI.Button level="3" component="a" onClick={this.openAbout.bind(this)}>О
-                                программе</UI.Button>
-                        </UI.Div>
+                        <Footer/>
                     </UI.Panel>
                 </UI.View>
             </UI.Root>
@@ -95,10 +87,6 @@ class App extends Component {
         } else {
             this.props.dispatch(vkActions.allowNotifications());
         }
-    }
-
-    openAbout() {
-        this.props.dispatch(push('/about'));
     }
 }
 
