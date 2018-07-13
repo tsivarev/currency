@@ -8,7 +8,7 @@
 /server/config/config.tsivarev.json
 
 # data
-/server/data
+/server/data/database.sqlite
 
 # testing
 /coverage
