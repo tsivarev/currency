@@ -26,23 +26,21 @@ class App extends Component {
 
     render() {
         return (
-            <UI.Root activeView="main">
-                <UI.View id="main" activePanel="mainPanel" header={false}>
-                    <UI.Panel id="mainPanel">
-                        <UI.Div style={{textAlign: 'center'}}>
-                            <img width={96} height={96} src={logo} alt="logo"/>
-                        </UI.Div>
-                        <UI.Group title="Курс ЦБ РФ">
-                            <CurrencyRateDashboard/>
-                            {this.renderNotificationButton()}
-                        </UI.Group>
-                        <UI.Group title="Калькулятор">
-                            <CurrencyConverter/>
-                        </UI.Group>
-                        <Footer/>
-                    </UI.Panel>
-                </UI.View>
-            </UI.Root>
+            <UI.View id="main" activePanel="mainPanel" header={false}>
+                <UI.Panel id="mainPanel">
+                    <UI.Div style={{textAlign: 'center'}}>
+                        <img width={96} height={96} src={logo} alt="logo"/>
+                    </UI.Div>
+                    <UI.Group title="Курс ЦБ РФ">
+                        <CurrencyRateDashboard/>
+                        {this.renderNotificationButton()}
+                    </UI.Group>
+                    <UI.Group title="Калькулятор">
+                        <CurrencyConverter/>
+                    </UI.Group>
+                    <Footer/>
+                </UI.Panel>
+            </UI.View>
         );
     }
 

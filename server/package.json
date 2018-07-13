@@ -2,9 +2,9 @@
   "name": "currency_server",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "server.js",
   "scripts": {
-    "dev": "nodemon src/app.js"
+    "dev": "nodemon src/server.js"
   },
   "author": "",
   "license": "ISC",
