@@ -68,6 +68,9 @@ export function initApp() {
                         accessToken: data['access_token']
                     });
                     break;
+
+                default:
+                //nop;
             }
         });
 

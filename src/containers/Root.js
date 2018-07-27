@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 import {ConnectedRouter} from 'react-router-redux';
 import '@vkontakte/vkui/dist/vkui.css';
 import App from './App';
-import About from './About';
 import {Route} from 'react-router';
 import * as vkActions from '../store/vk/actions';
 import * as vkSelectors from '../store/vk/reducer';
@@ -19,8 +18,8 @@ class Root extends Component {
         return (
             <ConnectedRouter history={this.props.history}>
                 <div>
-                    <Route exact path='/' component={() => <App accessToken={this.props.accessToken}/>}/>
-                    <Route path='/about' component={About}/>
+                    <Route path='/:pageId(about|)?' component={(props) => <App accessToken={this.props.accessToken}
+                                                                               pageId={props.match.params.pageId}/>}/>
                 </div>
             </ConnectedRouter>
         );

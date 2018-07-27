@@ -12,6 +12,7 @@ import * as vkSelectors from '../store/vk/reducer';
 import * as vkActions from '../store/vk/actions';
 import * as currencyRatesActions from '../store/currency_rates/actions';
 import Footer from './Footer';
+import About from './About';
 
 class App extends Component {
 
@@ -25,9 +26,11 @@ class App extends Component {
     }
 
     render() {
+        let activePanel = this.props.pageId === 'about' ? 'aboutPanel' : 'mainPanel';
+
         return (
-            <UI.Root activeView="main">
-                <UI.View id="main" activePanel="mainPanel" header={false}>
+            <UI.Root activeView="mainView">
+                <UI.View id="mainView" activePanel={activePanel} header={false}>
                     <UI.Panel id="mainPanel">
                         <UI.Div style={{textAlign: 'center'}}>
                             <img width={96} height={96} src={logo} alt="logo"/>
@@ -41,6 +44,7 @@ class App extends Component {
                         </UI.Group>
                         <Footer/>
                     </UI.Panel>
+                    <About id="aboutPanel"/>
                 </UI.View>
             </UI.Root>
         );
