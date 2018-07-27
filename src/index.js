@@ -2,12 +2,13 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import {applyMiddleware, createStore} from 'redux';
 import {Provider} from 'react-redux';
+import {Route} from 'react-router';
 import {createHashHistory} from 'history';
-import {routerMiddleware} from 'react-router-redux';
+import {ConnectedRouter, routerMiddleware} from 'react-router-redux';
 import thunk from 'redux-thunk';
 import {rootReducer} from './store/reducers';
 import registerServiceWorker from './registerServiceWorker';
-import Root from './containers/Root';
+import App from './containers/App';
 
 const history = createHashHistory({
     hashType: 'noslash'
@@ -25,7 +26,11 @@ const store = createStore(
 
 ReactDOM.render(
     <Provider store={store}>
-        <Root history={history}/>
+        <ConnectedRouter history={history}>
+            <div>
+                <Route path='/:pageId(about|)?' component={(props) => <App pageId={props.match.params.pageId}/>}/>
+            </div>
+        </ConnectedRouter>
     </Provider>,
     document.getElementById('root')
 );

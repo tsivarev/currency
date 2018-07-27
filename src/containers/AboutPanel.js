@@ -2,8 +2,9 @@ import React, {Component} from 'react';
 import * as UI from '@vkontakte/vkui';
 import '@vkontakte/vkui/dist/vkui.css';
 import {connect} from 'react-redux';
+import Footer from './Footer';
 
-class About extends Component {
+class AboutPanel extends Component {
 
     render() {
         return (
@@ -33,6 +34,7 @@ class About extends Component {
                         </UI.ListItem>
                     </UI.List>
                 </UI.Group>
+                <Footer/>
             </UI.Panel>
         );
     }
@@ -42,4 +44,4 @@ function mapStateToProps(state) {
     return {};
 }
 
-export default connect(mapStateToProps)(About);
+export default connect(mapStateToProps)(AboutPanel);
