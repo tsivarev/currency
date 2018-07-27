@@ -69,6 +69,13 @@ export function initApp() {
                     });
                     break;
 
+                case 'VKWebAppUpdateInsets':
+                    dispatch({
+                        type: types.VK_INSETS_FETCHED,
+                        insets: data.insets
+                    });
+                    break;
+
                 default:
                 //nop;
             }
@@ -93,12 +100,7 @@ function apiRequest(method, params = {}, accessToken = '', successCallback = und
             let found = false;
             if ('VKWebAppCallAPIMethodResult' === type) {
                 if (successCallback !== undefined) {
-                    //Dirty hack
-                    let isClient = typeof window !== 'undefined';
-                    let isAndroidBridge = isClient && window.AndroidBridge;
-
-                    let response = isAndroidBridge ? data['response']['response'] : data['response'];
-                    successCallback(response);
+                    successCallback(data['response']);
                 }
 
                 found = true;

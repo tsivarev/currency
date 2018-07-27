@@ -2,7 +2,9 @@ import React, {Component} from 'react';
 import * as UI from '@vkontakte/vkui';
 import '@vkontakte/vkui/dist/vkui.css';
 import {connect} from 'react-redux';
+import {goBack} from 'react-router-redux';
 import Footer from './Footer';
+import NavigationBar from './NavigationBar';
 
 class AboutPanel extends Component {
 
@@ -35,8 +37,13 @@ class AboutPanel extends Component {
                     </UI.List>
                 </UI.Group>
                 <Footer/>
+                <NavigationBar onClick={this.navigationBack.bind(this)}/>
             </UI.Panel>
         );
+    }
+
+    navigationBack() {
+        this.props.dispatch(goBack());
     }
 }
 

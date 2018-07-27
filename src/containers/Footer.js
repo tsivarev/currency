@@ -29,7 +29,7 @@ class Footer extends Component {
 
 function mapStateToProps(state) {
     return {
-        accessToken: vkSelectors.getVkAccessToken(state),
+        accessToken: vkSelectors.getAccessToken(state),
     };
 }
 
