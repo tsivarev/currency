@@ -14,7 +14,7 @@ class NavigationBar extends Component {
         return (
             <UI.FixedLayout vertical="bottom">
                 <UI.Div style={{background: UI.colors.lightBlue, color: '#fff', height: 30}}>
-                    <div onClick={this.props.onClick}>
+                    <div style={{display: 'inline-block'}} onClick={this.props.onClick}>
                         {osname === UI.IOS ?
                             <Icon28ChevronBack/> :
                             <Icon24Back/>}
