@@ -6,9 +6,6 @@ export function fetchCbrCurrencyRates() {
     return async (dispatch, getState) => {
         try {
             let date = new Date();
-            if (date.getUTCDay() === 1 || date.getUTCDay() === 7) {
-                date.setDate(date.getDate() + 1);
-            }
             const daily = await CBR.getDaily(date);
             dispatch({type: types.CBR_DAILY_FETCHED, daily: daily});
         } catch (error) {
