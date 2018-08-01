@@ -12,19 +12,28 @@ import * as vkSelectors from '../store/vk/reducer';
 import * as vkActions from '../store/vk/actions';
 import * as currencyRatesActions from '../store/currency_rates/actions';
 import Footer from './Footer';
+import Logger from "./Logger";
 
 class MainPanel extends Component {
 
     componentWillMount() {
-        if (this.props.accessToken) {
-            this.props.dispatch(vkActions.fetchNotificationStatus(this.props.accessToken));
-        }
-
         this.props.dispatch(currencyRatesActions.fetchUsdEurRate());
         this.props.dispatch(currencyRatesActions.fetchCbrCurrencyRates());
     }
 
+    componentDidUpdate() {
+        if (this.props.accessToken) {
+            this.props.dispatch(vkActions.fetchNotificationStatus(this.props.accessToken));
+        }
+    }
+
     render() {
+        const isProduction = process.env.NODE_ENV === 'production';
+        let logger = null;
+        if (!isProduction) {
+            logger = <Logger/>;
+        }
+
         return (
             <UI.Panel id={this.props.id}>
                 <UI.Div style={{textAlign: 'center'}}>
@@ -38,6 +47,7 @@ class MainPanel extends Component {
                     <CurrencyConverter/>
                 </UI.Group>
                 <Footer/>
+                {logger}
             </UI.Panel>
         );
     }

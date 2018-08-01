@@ -21,11 +21,11 @@ export default function reduce(state = initialState, action = {}) {
             });
         case types.VK_GET_ACCESS_TOKEN_FAILED:
             return state.merge({
-                accessTokenError: action.error
+                logs: action.error
             });
         case types.VK_NOTIFICATION_STATUS_FAILED:
             return state.merge({
-                notificationStatusError: action.error
+                logs: action.error
             });
         default:
             return state;
@@ -44,3 +44,6 @@ export function getInsets(state) {
     return state.vk.insets;
 }
 
+export function getLogs(state) {
+    return JSON.stringify(state.vk.logs);
+}

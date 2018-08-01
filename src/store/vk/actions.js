@@ -86,8 +86,9 @@ export function initApp() {
 }
 
 function apiRequest(method, params = {}, accessToken = '', successCallback = undefined, errorCallback = undefined) {
+    let requestId = getNewRequestId();
     if (successCallback !== undefined || errorCallback !== undefined) {
-        function callback(e) {
+        let clb = function callback(e) {
             let vkEvent = e.detail;
             if (!vkEvent) {
                 console.error('invalid event', e);
@@ -97,14 +98,16 @@ function apiRequest(method, params = {}, accessToken = '', successCallback = und
             let type = vkEvent['type'];
             let data = vkEvent['data'];
 
+            errorCallback(data);
+
             let found = false;
-            if ('VKWebAppCallAPIMethodResult' === type) {
+            if ('VKWebAppCallAPIMethodResult' === type && data['request_id'] === requestId) {
                 if (successCallback !== undefined) {
                     successCallback(data['response']);
                 }
 
                 found = true;
-            } else if ('VKWebAppCallAPIMethodFailed' === type) {
+            } else if ('VKWebAppCallAPIMethodFailed' === type && data['request_id'] === requestId) {
                 if (errorCallback !== undefined) {
                     errorCallback(data);
                 }
@@ -113,12 +116,12 @@ function apiRequest(method, params = {}, accessToken = '', successCallback = und
             }
 
             if (found) {
-                VKConnect.unsubscribe(callback);
+                VKConnect.unsubscribe(clb);
             }
 
-        }
+        };
 
-        VKConnect.subscribe(callback);
+        VKConnect.subscribe(clb);
     }
 
     params['access_token'] = accessToken;
@@ -127,7 +130,14 @@ function apiRequest(method, params = {}, accessToken = '', successCallback = und
         params['v'] = API_VERSION;
     }
 
+
     VKConnect.send('VKWebAppCallAPIMethod', {
-        'method': method, 'params': params
+        'method': method,
+        'params': params,
+        'request_id': requestId
     });
+}
+
+function getNewRequestId() {
+    return (Math.floor(Math.random() * Number.MAX_SAFE_INTEGER)).toString();
 }
