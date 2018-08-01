@@ -98,8 +98,6 @@ function apiRequest(method, params = {}, accessToken = '', successCallback = und
             let type = vkEvent['type'];
             let data = vkEvent['data'];
 
-            errorCallback(data);
-
             let found = false;
             if ('VKWebAppCallAPIMethodResult' === type && data['request_id'] === requestId) {
                 if (successCallback !== undefined) {

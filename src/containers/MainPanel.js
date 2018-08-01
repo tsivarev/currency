@@ -12,7 +12,7 @@ import * as vkSelectors from '../store/vk/reducer';
 import * as vkActions from '../store/vk/actions';
 import * as currencyRatesActions from '../store/currency_rates/actions';
 import Footer from './Footer';
-import Logger from "./Logger";
+import Logger from './Logger';
 
 class MainPanel extends Component {
 
