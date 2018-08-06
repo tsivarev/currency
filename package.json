@@ -4,8 +4,8 @@
   "private": true,
   "homepage": "https://tsivarev.github.io/currency/",
   "dependencies": {
-    "@vkontakte/icons": "^1.1.0",
-    "@vkontakte/vkui": "^2.5.5",
+    "@vkontakte/icons": "^1.1.1",
+    "@vkontakte/vkui": "^2.5.8",
     "@vkontakte/vkui-connect": "^1.0.0",
     "ecb-exchange-rates": "0.0.7",
     "gh-pages": "^1.2.0",

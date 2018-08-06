@@ -21,7 +21,7 @@ class App extends Component {
         return (
             <UI.ConfigProvider insets={this.props.insets} isWebView={isWebView}>
                 <UI.Root activeView="mainView">
-                    <UI.View id="mainView" activePanel={activePanel} header={false}>
+                    <UI.View id="mainView" activePanel={activePanel}>
                         <MainPanel id="mainPanel" accessToken={this.props.accessToken}/>
                         <AboutPanel id="aboutPanel"/>
                     </UI.View>

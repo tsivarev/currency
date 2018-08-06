@@ -3,14 +3,23 @@ import * as UI from '@vkontakte/vkui';
 import '@vkontakte/vkui/dist/vkui.css';
 import {connect} from 'react-redux';
 import {goBack} from 'react-router-redux';
+import Icon28ChevronBack from '@vkontakte/icons/dist/28/chevron_back';
+import Icon24Back from '@vkontakte/icons/dist/24/back';
 import Footer from './Footer';
-import NavigationBar from './NavigationBar';
 
 class AboutPanel extends Component {
 
     render() {
+        const osname = UI.platform();
+
         return (
             <UI.Panel id={this.props.id}>
+                <UI.PanelHeader
+                    left={<UI.HeaderButton onClick={this.navigationBack.bind(this)}>{osname === UI.IOS ?
+                        <Icon28ChevronBack/> : <Icon24Back/>}</UI.HeaderButton>}
+                >
+                    О программе
+                </UI.PanelHeader>
                 <UI.Group title="Исходный код">
                     <UI.Div>
                         Исходный код доступен на <a href="https://github.com/tsivarev/currency"
@@ -37,7 +46,6 @@ class AboutPanel extends Component {
                     </UI.List>
                 </UI.Group>
                 <Footer/>
-                <NavigationBar onClick={this.navigationBack.bind(this)}/>
             </UI.Panel>
         );
     }

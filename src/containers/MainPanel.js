@@ -36,6 +36,9 @@ class MainPanel extends Component {
 
         return (
             <UI.Panel id={this.props.id}>
+                <UI.PanelHeader>
+                    Курсы валют
+                </UI.PanelHeader>
                 <UI.Div style={{textAlign: 'center'}}>
                     <img width={96} height={96} src={logo} alt="logo"/>
                 </UI.Div>
