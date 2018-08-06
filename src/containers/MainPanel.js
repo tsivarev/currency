@@ -39,7 +39,7 @@ class MainPanel extends Component {
                 <UI.PanelHeader>
                     Курсы валют
                 </UI.PanelHeader>
-                <UI.Div style={{textAlign: 'center'}}>
+                <UI.Div style={{textAlign: 'center', marginTop: 10}}>
                     <img width={96} height={96} src={logo} alt="logo"/>
                 </UI.Div>
                 <UI.Group title="Курс ЦБ РФ">
@@ -57,7 +57,7 @@ class MainPanel extends Component {
 
     renderNotificationButton() {
         const {notificationStatus} = this.props;
-        if (!this.props.accessToken) {
+        if (!this.props.accessToken || notificationStatus === undefined) {
             return (<UI.Div>
                 <UI.Button
                     before={<Icon24User/>}
@@ -66,10 +66,6 @@ class MainPanel extends Component {
                     onClick={this.authorize.bind(this)}
                 >Авторизоваться</UI.Button>
             </UI.Div>);
-        }
-
-        if (notificationStatus === undefined) {
-            return (null);
         }
 
         return (<UI.Div>
