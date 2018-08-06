@@ -5,7 +5,6 @@ import * as UI from '@vkontakte/vkui';
 import '@vkontakte/vkui/dist/vkui.css';
 import './Footer.css'
 import Icon24Message from '@vkontakte/icons/dist/24/message';
-import * as vkSelectors from '../store/vk/reducer';
 
 class Footer extends Component {
 
@@ -29,7 +28,6 @@ class Footer extends Component {
 
 function mapStateToProps(state) {
     return {
-        accessToken: vkSelectors.getAccessToken(state),
     };
 }
 
