@@ -22,26 +22,25 @@ class AboutPanel extends Component {
                 </UI.PanelHeader>
                 <UI.Group title="Исходный код">
                     <UI.Div>
-                        Исходный код доступен на <a href="https://github.com/tsivarev/currency"
-                                                    title="Github">GitHub</a>.
+                        Исходный код доступен на <UI.Link href="https://github.com/tsivarev/currency">GitHub</UI.Link>.
                         <br/>
                         <br/>
-                        Документация <a href="https://vk.com/dev/vk_apps_docs">VK Apps платформы</a>.
+                        Документация <UI.Link href="https://vk.com/dev/vk_apps_docs">VK Apps платформы</UI.Link>.
                     </UI.Div>
                 </UI.Group>
                 <UI.Group title="Используемые ресурсы">
                     <UI.List>
                         <UI.ListItem multiline>
-                            Иконки – <a href="https://www.flaticon.com/authors/smashicons"
-                                        title="Smashicons">Smashicons</a>. Лицензия <a
-                            href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC
-                            3.0 BY</a>.
+                            Иконки – <UI.Link href="https://www.flaticon.com/authors/smashicons">Smashicons</UI.Link>.
+                            Лицензия <UI.Link
+                            href="http://creativecommons.org/licenses/by/3.0/">CC
+                            3.0 BY</UI.Link>.
                         </UI.ListItem>
                         <UI.ListItem multiline>
-                            Курсы ЦБ РФ – <a href="https://www.cbr-xml-daily.ru/">API</a>.
+                            Курсы ЦБ РФ – <UI.Link href="https://www.cbr-xml-daily.ru/">API</UI.Link>.
                         </UI.ListItem>
                         <UI.ListItem multiline>
-                            Курс USD/EUR – <a href="https://free.currencyconverterapi.com/">API</a>.
+                            Курс USD/EUR – <UI.Link href="https://free.currencyconverterapi.com/">API</UI.Link>.
                         </UI.ListItem>
                     </UI.List>
                 </UI.Group>
