@@ -11,9 +11,9 @@ class Footer extends Component {
     render() {
         return (
             <UI.Div className="footer">
-                <UI.Button level="3" component="a"
+                <UI.Button level="3" component="a" target="_blank"
                            href="https://vk.me/currency_app" before={<Icon24Message/>}/>
-                <UI.Button level="3" component="a"
+                <UI.Button level="3" component="a" target="_blank"
                            href="https://vk.com/currency_app">Группа</UI.Button>
                 <UI.Button level="3" component="a" onClick={this.openAbout.bind(this)}>О
                     программе</UI.Button>
