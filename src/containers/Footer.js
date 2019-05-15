@@ -21,7 +21,7 @@ class Footer extends Component {
     }
 
     openAbout() {
-        this.props.dispatch( this.props.router.navigate('about') );
+        this.props.router.navigate('about');
     }
 }
 

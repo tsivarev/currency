@@ -49,7 +49,7 @@ class AboutPanel extends Component {
     }
 
     navigationBack() {
-        this.props.dispatch( this.props.router.navigate('currency') );
+        this.props.router.navigate('currency')
     }
 }
 
