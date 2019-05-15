@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import * as UI from '@vkontakte/vkui';
 import '@vkontakte/vkui/dist/vkui.css';
 import {connect} from 'react-redux';
-import {goBack} from 'react-router-redux';
 import Icon28ChevronBack from '@vkontakte/icons/dist/28/chevron_back';
 import Icon24Back from '@vkontakte/icons/dist/24/back';
 import Footer from './Footer';
@@ -50,7 +49,7 @@ class AboutPanel extends Component {
     }
 
     navigationBack() {
-        this.props.dispatch(goBack());
+        this.props.dispatch( () => {} );
     }
 }
 

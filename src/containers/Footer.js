@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {push} from 'react-router-redux';
 import {connect} from 'react-redux';
 import * as UI from '@vkontakte/vkui';
 import '@vkontakte/vkui/dist/vkui.css';
@@ -22,7 +21,7 @@ class Footer extends Component {
     }
 
     openAbout() {
-        this.props.dispatch(push('/about'));
+        this.props.dispatch( ()=> {} );
     }
 }
 

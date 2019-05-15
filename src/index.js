@@ -1,38 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {applyMiddleware, createStore} from 'redux';
 import {Provider} from 'react-redux';
-import {Route} from 'react-router';
-import {createHashHistory} from 'history';
-import {ConnectedRouter, routerMiddleware} from 'react-router-redux';
-import thunk from 'redux-thunk';
-import {rootReducer} from './store/reducers';
+import { RouterProvider } from 'react-router5'
+import createRouter from './create-router'
+import configureStore  from './store/reducers';
 import registerServiceWorker from './registerServiceWorker';
 import App from './containers/App';
 
-const history = createHashHistory({
-    hashType: 'noslash'
-});
+const router = createRouter()
+const store = configureStore(router)
 
-const logger = store => next => action => {
-    console.log('dispatching', action);
-    return next(action);
-};
-
-const store = createStore(
-    rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
-    applyMiddleware(thunk, routerMiddleware(history), logger)
-);
-
-ReactDOM.render(
-    <Provider store={store}>
-        <ConnectedRouter history={history}>
-            <div>
-                <Route path='/:pageId(about|)?' component={(props) => <App pageId={props.match.params.pageId}/>}/>
-            </div>
-        </ConnectedRouter>
-    </Provider>,
-    document.getElementById('root')
-);
+router.start(() => {
+    ReactDOM.render((
+        <Provider store={store}>
+            <RouterProvider router={router}>
+                <App router={router}/>
+            </RouterProvider>
+        </Provider>
+    ), document.getElementById('root'))
+})
 
 registerServiceWorker();
