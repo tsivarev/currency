@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import * as UI from '@vkontakte/vkui';
+import { Button, Panel, PanelHeader, Div, Group } from '@vkontakte/vkui';
 import '@vkontakte/vkui/dist/vkui.css';
 import Icon24Notification from '@vkontakte/icons/dist/24/notification';
 import Icon24NotificationDisable from '@vkontakte/icons/dist/24/notification_disable';
@@ -35,47 +35,47 @@ class MainPanel extends Component {
         }
 
         return (
-            <UI.Panel id={this.props.id}>
-                <UI.PanelHeader>
+            <Panel id={this.props.id}>
+                <PanelHeader>
                     Курсы валют
-                </UI.PanelHeader>
-                <UI.Div style={{textAlign: 'center', marginTop: 10}}>
+                </PanelHeader>
+                <Div style={{textAlign: 'center', marginTop: 10}}>
                     <img width={96} height={96} src={logo} alt="logo"/>
-                </UI.Div>
-                <UI.Group title="Курс ЦБ РФ">
+                </Div>
+                <Group title="Курс ЦБ РФ">
                     <CurrencyRateDashboard/>
                     {this.renderNotificationButton()}
-                </UI.Group>
-                <UI.Group title="Калькулятор">
+                </Group>
+                <Group title="Калькулятор">
                     <CurrencyConverter/>
-                </UI.Group>
-                <Footer/>
+                </Group>
+                <Footer router={this.props.router}/>
                 {logger}
-            </UI.Panel>
+            </Panel>
         );
     }
 
     renderNotificationButton() {
         const {notificationStatus} = this.props;
         if (!this.props.accessToken || notificationStatus === undefined) {
-            return (<UI.Div>
-                <UI.Button
+            return (<Div>
+                <Button
                     before={<Icon24User/>}
                     level='1'
                     size="xl"
                     onClick={this.authorize.bind(this)}
-                >Авторизоваться</UI.Button>
-            </UI.Div>);
+                >Авторизоваться</Button>
+            </Div>);
         }
 
-        return (<UI.Div>
-            <UI.Button
+        return (<Div>
+            <Button
                 before={notificationStatus ? <Icon24NotificationDisable/> : <Icon24Notification/>}
                 level={notificationStatus ? '2' : '1'}
                 size="xl"
                 onClick={this.toggleNotifications.bind(this)}
-            >{notificationStatus ? 'Отписаться' : 'Подписаться'}</UI.Button>
-        </UI.Div>);
+            >{notificationStatus ? 'Отписаться' : 'Подписаться'}</Button>
+        </Div>);
     }
 
 

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import * as UI from '@vkontakte/vkui';
+import { Div, Input, Select } from '@vkontakte/vkui';
 import './CurrencyConverter.css';
 import {connect} from 'react-redux';
 import * as currencyRatesSelectors from '../store/currency_rates/reducer';
@@ -122,39 +122,39 @@ class CurrencyConverter extends Component {
 
     render() {
         return (
-            <UI.Div className="currency_converter">
-                <div style={{color: UI.colors.captionGray}}>
+            <Div className="currency_converter">
+                <div style={{color: '#71757A'}}>
                     Курс
                     1 {this.getCurrencySymbol(this.state.sourceCurrencyCode)} = {this.getPrettyAmount(this.getCurrencyRate(this.state.sourceCurrencyCode, this.state.targetCurrencyCode))} {this.getCurrencySymbol(this.state.targetCurrencyCode)}
                 </div>
                 <div className="currency_converter__amount_input">
                     <div className="currency_converter__amount_input__input">
-                        <UI.Input type="number" placeholder="0" pattern="\d*"
+                        <Input type="number" placeholder="0" pattern="\d*"
                                   value={this.state.amount ? this.state.amount.toLocaleString() : ''} alignment="right"
                                   onChange={this.changeAmount}/>
                     </div>
                     <div className="currency_converter__amount_input__selector">
-                        <UI.Select value={this.state.sourceCurrencyCode} onChange={this.changeSourceCurrencyCode}>
+                        <Select value={this.state.sourceCurrencyCode} onChange={this.changeSourceCurrencyCode}>
                             <option value={USD}>{this.getCurrencySymbol(USD)}</option>
                             <option value={EUR}>{this.getCurrencySymbol(EUR)}</option>
                             <option value={RUB}>{this.getCurrencySymbol(RUB)}</option>
-                        </UI.Select>
+                        </Select>
                     </div>
                 </div>
                 <div className="currency_converter__amount_input">
                     <div className="currency_converter__amount_input__input">
-                        <UI.Input type="text" alignment="right" disabled
+                        <Input type="text" alignment="right" disabled
                                   value={this.getPrettyAmount(this.state.convertedAmount)}/>
                     </div>
                     <div className="currency_converter__amount_input__selector">
-                        <UI.Select value={this.state.targetCurrencyCode} onChange={this.changeTargetCurrencyCode}>
+                        <Select value={this.state.targetCurrencyCode} onChange={this.changeTargetCurrencyCode}>
                             <option value={USD}>{this.getCurrencySymbol(USD)}</option>
                             <option value={EUR}>{this.getCurrencySymbol(EUR)}</option>
                             <option value={RUB}>{this.getCurrencySymbol(RUB)}</option>
-                        </UI.Select>
+                        </Select>
                     </div>
                 </div>
-            </UI.Div>);
+            </Div>);
     }
 }
 
