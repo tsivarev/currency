@@ -1,27 +1,27 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import * as UI from '@vkontakte/vkui';
+import { Div, Button } from '@vkontakte/vkui';
 import '@vkontakte/vkui/dist/vkui.css';
 import './Footer.css'
 import Icon24Message from '@vkontakte/icons/dist/24/message';
 
 class Footer extends Component {
-
+    
     render() {
         return (
-            <UI.Div className="footer">
-                <UI.Button level="3" component="a" target="_blank"
+            <Div className="footer">
+                <Button level="3" component="a" target="_blank"
                            href="https://vk.me/currency_app" before={<Icon24Message/>}/>
-                <UI.Button level="3" component="a" target="_blank"
-                           href="https://vk.com/currency_app">Группа</UI.Button>
-                <UI.Button level="3" component="a" onClick={this.openAbout.bind(this)}>О
-                    программе</UI.Button>
-            </UI.Div>
+                <Button level="3" component="a" target="_blank"
+                           href="https://vk.com/currency_app">Группа</Button>
+                <Button level="3" component="a" onClick={this.openAbout.bind(this)}>О
+                    программе</Button>
+            </Div>
         );
     }
 
     openAbout() {
-        this.props.dispatch( ()=> {} );
+        this.props.dispatch( this.props.router.navigate('about') );
     }
 }
 

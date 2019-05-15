@@ -5,7 +5,7 @@ import routes from './routes'
 
 export default function configureRouter() {
     const router = createRouter(routes, {
-        defaultRoute: ''
+        defaultRoute: 'currency'
     })
 
     router.usePlugin(loggerPlugin)

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import * as UI from '@vkontakte/vkui';
+import { Div } from '@vkontakte/vkui';
 import '@vkontakte/vkui/dist/vkui.css';
 import * as vkSelectors from '../store/vk/reducer';
 
@@ -8,9 +8,9 @@ class Logger extends Component {
 
     render() {
         return (
-            <UI.Div>
+            <Div>
                 {this.props.logs}
-            </UI.Div>
+            </Div>
         );
     }
 }
