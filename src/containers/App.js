@@ -13,7 +13,6 @@ class App extends Component {
 
     componentWillMount() {
         this.props.dispatch(vkActions.initApp());
-        this.props.dispatch(vkActions.fetchAccessToken());
     }
 
     render() {
